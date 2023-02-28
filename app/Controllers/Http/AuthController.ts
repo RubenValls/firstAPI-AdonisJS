@@ -6,10 +6,8 @@ public async login({ request, auth }: HttpContextContract) {
     const email = request.input("email");
     const password = request.input("password");
 
-    const token = await auth.use("api").attempt(email, password, {
-        expiresIn: "10 days",
-        });
-        return token.toJSON();
+    return await auth.use("api").attempt(email, password);
+
     }
 
     public async register({ request, auth }: HttpContextContract) {
@@ -26,10 +24,6 @@ public async login({ request, auth }: HttpContextContract) {
         user.password = password;
         await user.save();
 
-        const token = await auth.use("api").login(user, {
-        	expiresIn: "10 days",
-        });
-
-        return token.toJSON();
+        return user.toJSON();
     }
 }

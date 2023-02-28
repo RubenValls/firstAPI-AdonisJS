@@ -9,7 +9,6 @@ export default class extends BaseSchema {
             table.string("title", 255).notNullable();
             table.string("desc", 255).notNullable();
             table.boolean("done").defaultTo(false);
-            table.timestamps(true, true);
 		});
 	}
 
