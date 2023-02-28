@@ -26,4 +26,18 @@ Route.get('/', async () => {
 })
 */
 
+Route.group(() => {
+
+  Route.post("register", "AuthController.register");
+  Route.post("login", "AuthController.login");
+
+      Route.group(() => {
+      Route.get("todos", "TodosController.index");
+      Route.get("todos/:id", "TodosController.show");
+      Route.put("todos/update", "TodosController.update");
+      Route.post("todos", "TodosController.store");
+      }).middleware("auth:api");
+
+}).prefix("api");
+
 Route.get('learningsites', 'LearningsitesController.index')
